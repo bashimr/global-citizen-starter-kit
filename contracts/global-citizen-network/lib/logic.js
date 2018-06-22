@@ -155,7 +155,7 @@ function transferFunds(txParams) {
             case 'ANNUALY':
                 daysToAdd = 365;
                 break;
-        }      
+            }
             txParams.pledgeId.funds[i].nextFundingDueInDays = daysToAdd;
             txParams.pledgeId.funds[i].totalFundsReceived += txParams.pledgeId.funds[i].fundsPerInstallment;
             break;
