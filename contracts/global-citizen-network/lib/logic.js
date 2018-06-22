@@ -130,35 +130,35 @@ function transferFunds(txParams) {
     }
     var factory = getFactory();
     var valid = false;
-    for(var i = 0; i < txParams.govOrgId.fundedPledges.length; i++) {
+    for(let i = 0; i < txParams.govOrgId.fundedPledges.length; i++) {
         if(txParams.govOrgId.fundedPledges[i].pledgeId === txParams.pledgeId.pledgeId) {
-        valid = true;
-        break;
+            valid = true;
+            break;
         }
     }
     if(!valid) {
         throw new Error('Pledge not funded!!');
     }
-    for(var i = 0; i < txParams.pledgeId.funds.length; i++) {
+    for(let i = 0; i < txParams.pledgeId.funds.length; i++) {
         if(txParams.pledgeId.funds[i].govOrgId === txParams.govOrgId) {
-        var daysToAdd = 0;
-        switch(txParams.pledgeId.funds[i].fundingType) {
-        case 'WEEKLY':
-            daysToAdd = 7;
-            break;
-        case 'MONTHLY':
-            daysToAdd = 30;
-            break;
-        case 'SEMIANNUALY':
-            daysToAdd = 180;
-            break;
-        case 'ANNUALY':
-            daysToAdd = 365;
-            break;
+            var daysToAdd = 0;
+            switch(txParams.pledgeId.funds[i].fundingType) {
+            case 'WEEKLY':
+                daysToAdd = 7;
+                break;
+            case 'MONTHLY':
+                daysToAdd = 30;
+                break;
+            case 'SEMIANNUALY':
+                daysToAdd = 180;
+                break;
+            case 'ANNUALY':
+                daysToAdd = 365;
+                break;
         }      
-        txParams.pledgeId.funds[i].nextFundingDueInDays = daysToAdd;
-        txParams.pledgeId.funds[i].totalFundsReceived += txParams.pledgeId.funds[i].fundsPerInstallment;
-        break;
+            txParams.pledgeId.funds[i].nextFundingDueInDays = daysToAdd;
+            txParams.pledgeId.funds[i].totalFundsReceived += txParams.pledgeId.funds[i].fundsPerInstallment;
+            break;
         }
     }
     return getAssetRegistry(NS + '.ProjectPledge').then(function (registry) {
