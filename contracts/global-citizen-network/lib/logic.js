@@ -9,7 +9,7 @@ var NS = 'org.apptellect.gc';
  * @transaction
  */
 function createProjectPledge(txParams) {
-    if(!txParams.name || (txParams.name && txParams.name === "")) {
+    if(!txParams.name || (txParams.name && txParams.name === '')) {
         throw new Error('Invalid Pledge Name!!');
     }
     if(!txParams.aidOrg) {
@@ -71,7 +71,7 @@ function sendPledgeToGovOrg(txParams) {
         return getParticipantRegistry(NS + '.GovOrg');
     }).then(function (registry) {
         for(var i = 0; i < txParams.govOrg.length; i++) {
-        txParams.govOrg[i].projectPledge.push(txParams.pledgeId);
+            txParams.govOrg[i].projectPledge.push(txParams.pledgeId);
         }
         return registry.updateAll(txParams.govOrg);
     });
@@ -82,42 +82,42 @@ function sendPledgeToGovOrg(txParams) {
  * @transaction
  */
 function updatePledge(txParams) {
-  if(!txParams.govOrgId) {
-    throw new Error('Invalid user type!!');
-  }
-  var factory = getFactory();
-  var funding = factory.newConcept(NS, 'Funding');
-  var daysToAdd = 0;
-  switch(txParams.fundingType) {
-  case 'WEEKLY':
-    daysToAdd = 7;
-    break;
-  case 'MONTHLY':
-    daysToAdd = 30;
-    break;
-  case 'SEMIANNUALY':
-    daysToAdd = 180;
-    break;
-  case 'ANNUALY':
-    daysToAdd = 365;
-    break;
-  }
-  funding.fundingType = txParams.fundingType;
-  funding.nextFundingDueInDays = daysToAdd;
-  funding.approvedFunding = txParams.approvedFunding;
-  funding.totalFundsReceived = 0;
-  funding.fundsPerInstallment = txParams.fundsPerInstallment;
-  funding.govOrgId = txParams.govOrgId;
-  txParams.pledgeId.status = 'PROPOSALFUNDED';
-  txParams.pledgeId.funds.push(funding);
-  txParams.govOrgId.fundedPledges.push(txParams.pledgeId);
-  return getAssetRegistry(NS + '.ProjectPledge').then(function (registry) {
-    return registry.update(txParams.pledgeId);
-  }).then(function () {
-    return getParticipantRegistry(NS + '.GovOrg');
-  }).then(function (registry) {
-    return registry.update(txParams.govOrgId);
-  });
+    if(!txParams.govOrgId) {
+        throw new Error('Invalid user type!!');
+    }
+    var factory = getFactory();
+    var funding = factory.newConcept(NS, 'Funding');
+    var daysToAdd = 0;
+    switch(txParams.fundingType) {
+    case 'WEEKLY':
+        daysToAdd = 7;
+        break;
+    case 'MONTHLY':
+        daysToAdd = 30;
+        break;
+    case 'SEMIANNUALY':
+        daysToAdd = 180;
+        break;
+    case 'ANNUALY':
+        daysToAdd = 365;
+        break;
+    }
+    funding.fundingType = txParams.fundingType;
+    funding.nextFundingDueInDays = daysToAdd;
+    funding.approvedFunding = txParams.approvedFunding;
+    funding.totalFundsReceived = 0;
+    funding.fundsPerInstallment = txParams.fundsPerInstallment;
+    funding.govOrgId = txParams.govOrgId;
+    txParams.pledgeId.status = 'PROPOSALFUNDED';
+    txParams.pledgeId.funds.push(funding);
+    txParams.govOrgId.fundedPledges.push(txParams.pledgeId);
+    return getAssetRegistry(NS + '.ProjectPledge').then(function (registry) {
+        return registry.update(txParams.pledgeId);
+    }).then(function () {
+        return getParticipantRegistry(NS + '.GovOrg');
+    }).then(function (registry) {
+        return registry.update(txParams.govOrgId);
+    });
 }
 /**
  * TransferFunds
