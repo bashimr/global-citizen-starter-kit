@@ -62,12 +62,12 @@ asset ProjectPledge identified by pledgeId {
 }
 
 abstract participant User {
-  --> ProjectPledge[] projectPledge
+  --> ProjectPledge[] projectPledge optional
 }
 
 participant GovOrg identified by govOrgId extends User {
   o String govOrgId
-  --> ProjectPledge[] fundedPledges
+  --> ProjectPledge[] fundedPledges optional
 }
 
 participant AidOrg identified by aidOrgId extends User {
