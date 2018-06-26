@@ -31,13 +31,13 @@ describe('Starting tests for global-citizen-starter-kit', function() {
     })
   });
 
-  it('network-name should be global-citizen-network@0.0.3',() => {
+  it('network-name should be global-citizen-network@0.0.4',() => {
     element(by.css('.network-name')).getWebElement()
     .then((webElement) => {
       return webElement.getText();
     })
     .then((txt) => {
-      expect(txt).toBe('global-citizen-network@0.0.3.bna');
+      expect(txt).toBe('global-citizen-network@0.0.4.bna');
     });
   });
 

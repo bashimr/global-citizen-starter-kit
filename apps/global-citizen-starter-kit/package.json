@@ -1,7 +1,7 @@
 {
   "name": "global-citizen-starter-kit",
   "description": "Global Citizen Angular App",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Imran Bashir",
   "email": "ibashir@gmail.com",
   "license": "Apptellect Inc.",
@@ -17,8 +17,6 @@
     "build": "ng build",
     "prepack": "npm run build",
     "start": "ng serve --proxy-config proxy.conf.js --host 0.0.0.0",
-    "lint": "tslint \"src/**/*.ts\"",
-    "test": "ng test --watch false",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor"
   },
