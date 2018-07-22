@@ -1,0 +1,87 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Write your model definitions here
+ */
+
+namespace org.apptellect.swayloyalty
+
+
+/* 
+
+PARTICIPANTS:
+- Youtuber
+- Subscriber
+- Sponsor
+
+ASSETS:
+- PointsCard
+- SponsorOffer
+- Coin
+
+TRANSACTIONS:
+- issuePoints
+- redeemPoints
+
+*/
+
+participant User identified by userID {
+    o String userID
+    o String firstName
+    o String[] middleName optional
+    o String lastName
+}
+
+participant Influencer identified by influencerID{
+  o String influencerID
+  o String influencerName
+}
+
+participant Business identified by businessID {
+  o String businessID
+  o String businessName
+}
+
+asset RewardsCard identified by cardNumber {
+  o String cardNumber
+  o Double coinBalance
+  --> User cardOwner
+}
+
+asset RewardsOffer identified by offerId {
+  o String offerId
+  o Double coinAmount
+  --> Business business
+}
+
+transaction IssueRewards {
+    --> RewardsOffer offer
+    --> RewardsCard receivingCard
+}
+
+event IssueRewardsEvent {
+    --> RewardsOffer offer
+    --> RewardsCard receivingCard
+}
+
+transaction RedeemRewards {
+    --> RewardsOffer offer
+    --> RewardsCard redeemingCard
+}
+
+event RedeemRewardsEvent{
+    --> RewardsOffer offer
+    --> RewardsCard redeemingCard
+}
