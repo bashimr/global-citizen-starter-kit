@@ -6,8 +6,7 @@
   "version": "0.0.1",
   "description": "Sway Loyalty Network",
   "scripts": {
-    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/sway-loyalty.bna",
-    "pretest": "npm run lint"
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/sway-loyalty.bna"
   },
   "keywords": [
     "composer",
