@@ -7,9 +7,7 @@
   "description": "Sway Loyalty Network",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/sway-loyalty.bna",
-    "pretest": "npm run lint",
-    "lint": "eslint .",
-    "test": "nyc mocha -t 0 test/*.js && cucumber-js"
+    "pretest": "npm run lint"
   },
   "keywords": [
     "composer",
